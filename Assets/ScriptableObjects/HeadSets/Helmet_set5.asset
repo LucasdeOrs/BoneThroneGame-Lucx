@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d63cbcc6cc8ca4287a31e50e36f3aa, type: 3}
+  m_Name: Helmet_set5
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentPart
+  partName: Helmet
+  animationFrames:
+  - {fileID: -8387250723037758876, guid: ade9c0c87d1dec249b741619363fdf96, type: 3}
+  - {fileID: -597768004631061881, guid: ade9c0c87d1dec249b741619363fdf96, type: 3}
+  - {fileID: -7540694223097639425, guid: ade9c0c87d1dec249b741619363fdf96, type: 3}
+  - {fileID: 6123921549603493479, guid: ade9c0c87d1dec249b741619363fdf96, type: 3}
+  - {fileID: -464922041266080743, guid: ade9c0c87d1dec249b741619363fdf96, type: 3}

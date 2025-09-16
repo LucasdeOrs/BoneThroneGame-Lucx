@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d63cbcc6cc8ca4287a31e50e36f3aa, type: 3}
+  m_Name: Sword_set1
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentPart
+  partName: Sword
+  animationFrames:
+  - {fileID: 4872741818247865251, guid: 7d124a7aefa871c4bbf2933bb607b16a, type: 3}
+  - {fileID: -4246407273648311568, guid: 7d124a7aefa871c4bbf2933bb607b16a, type: 3}
+  - {fileID: -4427874671876524796, guid: 7d124a7aefa871c4bbf2933bb607b16a, type: 3}
+  - {fileID: 3795477859788967200, guid: 7d124a7aefa871c4bbf2933bb607b16a, type: 3}
+  - {fileID: 6519210683465125768, guid: 7d124a7aefa871c4bbf2933bb607b16a, type: 3}

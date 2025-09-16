@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d63cbcc6cc8ca4287a31e50e36f3aa, type: 3}
+  m_Name: Boots_set2
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentPart
+  partName: Boots
+  animationFrames:
+  - {fileID: 1690784152804442567, guid: 891dc8f8f9a57af41acd4aba7a9b042d, type: 3}
+  - {fileID: -418323390652896616, guid: 891dc8f8f9a57af41acd4aba7a9b042d, type: 3}
+  - {fileID: -3630687840900908380, guid: 891dc8f8f9a57af41acd4aba7a9b042d, type: 3}
+  - {fileID: 3076965731956191130, guid: 891dc8f8f9a57af41acd4aba7a9b042d, type: 3}
+  - {fileID: -2135383058518320819, guid: 891dc8f8f9a57af41acd4aba7a9b042d, type: 3}

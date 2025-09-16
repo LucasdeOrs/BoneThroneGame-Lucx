@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d63cbcc6cc8ca4287a31e50e36f3aa, type: 3}
+  m_Name: Shield_set3
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentPart
+  partName: Shield
+  animationFrames:
+  - {fileID: 5390987401630342614, guid: 47c6baffefe5723468e645a81502b413, type: 3}
+  - {fileID: -4781460071344284519, guid: 47c6baffefe5723468e645a81502b413, type: 3}
+  - {fileID: 5244471816254554978, guid: 47c6baffefe5723468e645a81502b413, type: 3}
+  - {fileID: 895312934014274595, guid: 47c6baffefe5723468e645a81502b413, type: 3}
+  - {fileID: -1822095285251158847, guid: 47c6baffefe5723468e645a81502b413, type: 3}
