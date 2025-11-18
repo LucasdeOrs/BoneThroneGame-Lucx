@@ -36,11 +36,11 @@ public class UIEquipmentManager : MonoBehaviour
     public Button swordButton;
     public Button shieldButton;
 
-    private int headIndex = 0;
-    private int chestIndex = 0;
-    private int legsIndex = 0;
-    private int swordIndex = 0;
-    private int shieldIndex = 0;
+    public int headIndex = 0;
+    public int chestIndex = 0;
+    public int legsIndex = 0;
+    public int swordIndex = 0;
+    public int shieldIndex = 0;
 
     private int[] upgradeCosts = { 20, 50, 100, 500, 1000 };
 
@@ -89,7 +89,7 @@ public class UIEquipmentManager : MonoBehaviour
         return arr;
     }
 
-    private void ApplyCurrentUpgrades()
+    public void ApplyCurrentUpgrades()
     {
         if (playerXP == null) return;
 
@@ -147,7 +147,7 @@ public class UIEquipmentManager : MonoBehaviour
             playerXP.missChance = Mathf.Max(0f, 0.5f - shieldUpgrades[shieldIndex].value);
     }
 
-    private void UpdateButtonTexts()
+    public void UpdateButtonTexts()
     {
         UpdateButtonText(headButton, "Head", headIndex, headSets.Length);
         UpdateButtonText(chestButton, "Chest", chestIndex, chestSets.Length);
@@ -187,4 +187,23 @@ public class UIEquipmentManager : MonoBehaviour
             UpdateButtonTexts();
         }
     }
+    public void ApplyVisualsFromIndices()
+{
+    if (player == null) return;
+
+    if (headSets != null && headSets.Length > headIndex)
+        player.Equip("Head", headSets[headIndex]);
+
+    if (chestSets != null && chestSets.Length > chestIndex)
+        player.Equip("Chest", chestSets[chestIndex]);
+
+    if (legsSets != null && legsSets.Length > legsIndex)
+        player.Equip("Legs", legsSets[legsIndex]);
+
+    if (swordSets != null && swordSets.Length > swordIndex)
+        player.Equip("Sword", swordSets[swordIndex]);
+
+    if (shieldSets != null && shieldSets.Length > shieldIndex)
+        player.Equip("Shield", shieldSets[shieldIndex]);
+}
 }
