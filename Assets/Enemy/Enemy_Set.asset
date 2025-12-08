@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d63cbcc6cc8ca4287a31e50e36f3aa, type: 3}
+  m_Name: Enemy_Set
+  m_EditorClassIdentifier: Assembly-CSharp::EquipmentPart
+  partName: 
+  animationFrames:
+  - {fileID: -1867892740501272505, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: 2727186353141124680, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: -7333525348600956540, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: -1466909005783703795, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: 5608990582236951492, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: 6759345208283959925, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: -2889505834630021751, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: -7139910797369994364, guid: d717a353f8db6c74a81d98baec17436e, type: 3}
+  - {fileID: 1000832238369823284, guid: d717a353f8db6c74a81d98baec17436e, type: 3}

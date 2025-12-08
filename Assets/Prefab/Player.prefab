@@ -210,7 +210,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1000, y: 400, z: 0}
-  m_LocalScale: {x: 250, y: 250, z: 200}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 802522362837132952}
@@ -321,6 +321,13 @@ MonoBehaviour:
   sfxMissVolume: 0.38
   sfxCritVolume: 1.4
   pitchJitter: 0.05
+  attackRange: 200
+  attackOffset: {x: 200, y: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackAllInRange: 0
+  debugDrawAttack: 1
 --- !u!114 &5870774240610769195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +344,12 @@ MonoBehaviour:
   currentHP: 0
   hpText: {fileID: 0}
   hpBar: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  freezeOnDeath: 1
+  backToMenuButton: {fileID: 0}
+  loadButton: {fileID: 0}
+  menuSceneName: SampleScene
+  saveSystem: {fileID: 0}
 --- !u!1 &2568286932635954837
 GameObject:
   m_ObjectHideFlags: 0

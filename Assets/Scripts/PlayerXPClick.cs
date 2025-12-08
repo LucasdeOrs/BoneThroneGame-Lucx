@@ -50,8 +50,16 @@ public class PlayerXPClick : MonoBehaviour, IPointerClickHandler
     [Tooltip("Variação leve de pitch para dar sensação de responsividade")]
     [Range(0f, 0.25f)] public float pitchJitter = 0.05f;
 
+    [Header("Dano automático (mundo 2D)")]
+    public float attackRange = 1.5f;
+    public Vector2 attackOffset = new Vector2(0.8f, 0f);
+    public LayerMask enemyLayer;
+    public bool attackAllInRange = false;
+    public bool debugDrawAttack = false;
+
     private AudioSource sfxSource;
     private float passiveBuffer = 0f;
+    private readonly Collider2D[] overlapBuffer = new Collider2D[8];
 
     void Start()
     {
@@ -112,6 +120,10 @@ public class PlayerXPClick : MonoBehaviour, IPointerClickHandler
                 PlaySFX(sfxCrit, sfxCritVolume);
             else
                 PlaySFX(sfxHit, sfxHitVolume);
+
+            // aplica dano automático em inimigo na frente (mundo 2D)
+            if (xpToAddInt > 0)
+                DealDamageInFront(xpToAddInt);
         }
         else
         {
@@ -121,7 +133,8 @@ public class PlayerXPClick : MonoBehaviour, IPointerClickHandler
 
         if (floatingTextPrefab != null && floatingTextSpawnPoint != null)
         {
-            GameObject go = Instantiate(floatingTextPrefab, xpText.canvas.transform);
+            Transform parent = xpText != null ? xpText.canvas.transform : floatingTextSpawnPoint;
+            GameObject go = Instantiate(floatingTextPrefab, parent);
             Vector3 screenPos = Camera.main.WorldToScreenPoint(floatingTextSpawnPoint.position);
             go.transform.position = screenPos;
 
@@ -154,4 +167,53 @@ public class PlayerXPClick : MonoBehaviour, IPointerClickHandler
         float vol = Mathf.Clamp01(sfxVolume * perEventVolume);
         sfxSource.PlayOneShot(clip, vol);
     }
+
+    // ===== Dano em inimigos próximos (sem clicar neles) =====
+    private void DealDamageInFront(int damage)
+    {
+        if (damage <= 0) return;
+
+        Vector3 center = transform.position + (Vector3)attackOffset;
+        int mask = enemyLayer.value == 0 ? Physics2D.AllLayers : enemyLayer.value;
+        int hits = Physics2D.OverlapCircle(center, attackRange, new ContactFilter2D { useLayerMask = true, layerMask = mask, useTriggers = true }, overlapBuffer);
+        if (hits <= 0) return;
+
+        EnemyController best = null;
+        float bestDist = float.MaxValue;
+
+        for (int i = 0; i < hits; i++)
+        {
+            var col = overlapBuffer[i];
+            if (col == null) continue;
+
+            var enemy = col.GetComponent<EnemyController>() ?? col.GetComponentInParent<EnemyController>();
+            if (enemy == null) continue;
+
+            if (attackAllInRange)
+            {
+                enemy.TakeDamage(damage);
+                continue;
+            }
+
+            float d = (enemy.transform.position - center).sqrMagnitude;
+            if (d < bestDist)
+            {
+                bestDist = d;
+                best = enemy;
+            }
+        }
+
+        if (!attackAllInRange && best != null)
+            best.TakeDamage(damage);
+    }
+
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        if (!debugDrawAttack) return;
+        Gizmos.color = Color.red;
+        Vector3 center = transform.position + (Vector3)attackOffset;
+        Gizmos.DrawWireSphere(center, attackRange);
+    }
+#endif
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.IO;
 
 [System.Serializable]
@@ -12,6 +13,11 @@ public class PlayerSaveData
     public float critChance;
     public float critMultiplier;
     public float tempClickMultiplier;
+    public int currentRound;
+
+    // PlayerHealth
+    public int playerCurrentHP;
+    public int playerMaxHP;
 
     // Equipamentos equipados (sprites)
     public string headName;
@@ -35,6 +41,14 @@ public class JsonSaveSystem : MonoBehaviour
     public PlayerEquipment playerEquipment;
     public EquipmentDatabase equipmentDatabase;
     public UIEquipmentManager uiEquipment;
+    public PlayerHealth playerHealth;
+    public RoundManager roundManager;
+
+    [Header("UI")]
+    public Button saveButton;
+    public Text saveButtonLabel;
+    public string saveReadyText = "Salvar";
+    public string saveBlockedText = "Salvar (aguarde a preparação)";
 
     private string filePath;
 
@@ -44,12 +58,23 @@ public class JsonSaveSystem : MonoBehaviour
         Debug.Log("Save path: " + filePath);
     }
 
+    void Update()
+    {
+        UpdateSaveButtonUI();
+    }
+
     // ========== SALVAR ==========
     public void SaveGame()
     {
         if (xpClick == null)
         {
             Debug.LogWarning("JsonSaveSystem: xpClick não atribuído!");
+            return;
+        }
+
+        if (roundManager != null && !roundManager.IsInPrepPhase())
+        {
+            Debug.LogWarning("JsonSaveSystem: só é permitido salvar na fase de preparação. Aguarde o intervalo entre hordas.");
             return;
         }
 
@@ -64,6 +89,13 @@ public class JsonSaveSystem : MonoBehaviour
         data.critMultiplier = xpClick.critMultiplier;
         data.tempClickMultiplier = xpClick.tempClickMultiplier;
 
+        // HP
+        if (playerHealth != null)
+        {
+            data.playerCurrentHP = playerHealth.currentHP;
+            data.playerMaxHP = playerHealth.maxHP;
+        }
+
         // Equip sprites
         if (playerEquipment != null)
         {
@@ -73,6 +105,10 @@ public class JsonSaveSystem : MonoBehaviour
             data.swordName = GetName(playerEquipment.sword);
             data.shieldName = GetName(playerEquipment.shield);
         }
+
+        // Round
+        if (roundManager != null)
+            data.currentRound = roundManager.GetCurrentRound();
 
         // Níveis de upgrade (parte esquerda)
         if (uiEquipment != null)
@@ -105,6 +141,9 @@ public class JsonSaveSystem : MonoBehaviour
             return;
         }
 
+        Time.timeScale = 1f; // garante que o jogo retome após carregar (ex.: se veio do pause)
+        ClearEnemiesAll();
+
         string json = File.ReadAllText(filePath);
         PlayerSaveData data = JsonUtility.FromJson<PlayerSaveData>(json);
 
@@ -120,6 +159,14 @@ public class JsonSaveSystem : MonoBehaviour
             xpClick.tempClickMultiplier = data.tempClickMultiplier;
 
             xpClick.UpdateXPText();
+        }
+
+        // HP
+        if (playerHealth != null)
+        {
+            playerHealth.maxHP = data.playerMaxHP > 0 ? data.playerMaxHP : playerHealth.maxHP;
+            playerHealth.currentHP = Mathf.Clamp(data.playerCurrentHP, 0, playerHealth.maxHP);
+            playerHealth.UpdateHPUI();
         }
 
         // Equip sprites pelo nome (opcional, mas ajuda a garantir visual certo)
@@ -146,10 +193,39 @@ public class JsonSaveSystem : MonoBehaviour
             uiEquipment.UpdateButtonTexts();       // atualiza "Head (50 XP)" etc.
         }
 
+        // Round
+        if (roundManager != null)
+        {
+            int round = data.currentRound > 0 ? data.currentRound : 1;
+            roundManager.SetRoundAndRestart(round);
+        }
+        else
+        {
+            ClearEnemiesAll();
+        }
+
         Debug.Log("Jogo carregado!");
     }
 
 
     // OPCIONAL: salvar/carregar por teclado pra testar rápido
+    private void UpdateSaveButtonUI()
+    {
+        if (saveButton == null) return;
 
+        bool canSave = roundManager == null || roundManager.IsInPrepPhase();
+        saveButton.interactable = canSave;
+
+        if (saveButtonLabel != null)
+            saveButtonLabel.text = canSave ? saveReadyText : saveBlockedText;
+    }
+
+    private void ClearEnemiesAll()
+    {
+        foreach (var enemy in FindObjectsOfType<EnemyController>())
+        {
+            if (enemy != null)
+                Destroy(enemy.gameObject);
+        }
+    }
 }

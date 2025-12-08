@@ -8,9 +8,8 @@ public class EnemyClick : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (enemy == null || playerXP == null) return;
-
-        int damage = Mathf.Max(1, playerXP.baseXPPerClick);
-        enemy.TakeDamage(damage);
+        // Encaminha o clique para o PlayerXPClick (para subir XP/atacar via overlap)
+        if (playerXP != null)
+            playerXP.OnPointerClick(eventData);
     }
 }

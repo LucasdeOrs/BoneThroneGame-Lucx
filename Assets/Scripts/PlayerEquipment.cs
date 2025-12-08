@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerEquipment : MonoBehaviour
@@ -21,6 +22,7 @@ public class PlayerEquipment : MonoBehaviour
     private bool isAttacking = false;
     private bool fastClickMode = false;
     private bool isClicking = false;
+    private Coroutine hitRoutine;
 
     [Header("Configuração da Animação")]
     public float baseFrameRate = 0.16f;
@@ -84,6 +86,31 @@ public class PlayerEquipment : MonoBehaviour
     public void StopClicking()
     {
         isClicking = false;
+    }
+
+    public void PlayHitReaction(float duration = 0.15f, float flashStrength = 0.4f)
+    {
+        if (hitRoutine != null)
+            StopCoroutine(hitRoutine);
+        hitRoutine = StartCoroutine(HitFlash(duration, flashStrength));
+    }
+
+    private IEnumerator HitFlash(float duration, float flashStrength)
+    {
+        Color flash = new Color(1f, 1f - flashStrength, 1f - flashStrength, 1f);
+        ApplyColor(flash);
+        yield return new WaitForSeconds(duration);
+        ApplyColor(Color.white);
+        hitRoutine = null;
+    }
+
+    private void ApplyColor(Color color)
+    {
+        if (headRenderer != null) headRenderer.color = color;
+        if (chestRenderer != null) chestRenderer.color = color;
+        if (legsRenderer != null) legsRenderer.color = color;
+        if (swordRenderer != null) swordRenderer.color = color;
+        if (shieldRenderer != null) shieldRenderer.color = color;
     }
 
     private void StopAttackAndReset()
