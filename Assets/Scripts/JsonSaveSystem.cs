@@ -197,7 +197,7 @@ public class JsonSaveSystem : MonoBehaviour
         if (roundManager != null)
         {
             int round = data.currentRound > 0 ? data.currentRound : 1;
-            roundManager.SetRoundAndRestart(round);
+            roundManager.SetRoundAndRestartFromLoad(round);
         }
         else
         {

@@ -82,7 +82,7 @@ public class EnemyController : MonoBehaviour
 
         // escalar dificuldade por round
         int r = Mathf.Max(1, round);
-        maxHP = Mathf.RoundToInt(20 + (r - 1) * 8f);
+        maxHP = Mathf.RoundToInt(25 + (r - 1) * 8f);
         currentHP = maxHP;
         damagePerHit = Mathf.RoundToInt(3 + (r - 1) * 1.5f);
         moveSpeed *= 1f + moveSpeedPerRound * (r - 1);
@@ -239,7 +239,7 @@ public class EnemyController : MonoBehaviour
         // recompensa de XP por inimigo
         if (playerXP != null)
         {
-            int reward = 5 * roundNumber;
+            int reward = 4 * roundNumber;
             playerXP.xp += reward;
             playerXP.UpdateXPText();
         }

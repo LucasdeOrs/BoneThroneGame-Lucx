@@ -6875,6 +6875,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1758010043}
     - target: {fileID: 5947335821317029746, guid: bd5c4e58755a1a440bc7b150fca646b9, type: 3}
+      propertyPath: missChance
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947335821317029746, guid: bd5c4e58755a1a440bc7b150fca646b9, type: 3}
+      propertyPath: maxClicksPerSecond
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947335821317029746, guid: bd5c4e58755a1a440bc7b150fca646b9, type: 3}
       propertyPath: floatingTextSpawnPoint
       value: 
       objectReference: {fileID: 220120842}

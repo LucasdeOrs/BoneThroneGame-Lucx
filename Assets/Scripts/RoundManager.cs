@@ -39,6 +39,7 @@ public class RoundManager : MonoBehaviour
     private EnemyController currentAttacker;
     private bool hasStarted = false;
     private bool gameFinished = false;
+    private bool skipHealNextPrep = false;
 
     void Start()
     {
@@ -56,7 +57,9 @@ public class RoundManager : MonoBehaviour
     private void StartPrepPhase()
     {
         inBattle = false;
-        HealPlayerForPrep();
+        if (!skipHealNextPrep)
+            HealPlayerForPrep();
+        skipHealNextPrep = false;
         StartCoroutine(PrepRoutine());
     }
 
@@ -174,6 +177,12 @@ public class RoundManager : MonoBehaviour
         gameFinished = false;
         ClearExistingEnemies();
         StartPrepPhase();
+    }
+
+    public void SetRoundAndRestartFromLoad(int round)
+    {
+        skipHealNextPrep = true;
+        SetRoundAndRestart(round);
     }
 
     public bool IsInPrepPhase()

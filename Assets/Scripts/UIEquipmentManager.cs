@@ -42,7 +42,7 @@ public class UIEquipmentManager : MonoBehaviour
     public int swordIndex = 0;
     public int shieldIndex = 0;
 
-    private int[] upgradeCosts = { 20, 50, 100, 500, 1000 };
+    private int[] upgradeCosts = { 40, 120, 250, 600, 1200 };
 
     private int GetUpgradeCost(int currentLevel)
     {

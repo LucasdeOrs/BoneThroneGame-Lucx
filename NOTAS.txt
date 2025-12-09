@@ -1,0 +1,8 @@
+Anotações rápidas do projeto:
+- Cenas na Build: adicione a cena principal (jogo) e a de menu (se tiver) em File > Build Settings, na ordem correta (principal no índice 0).
+- RoundManager: não inicia automaticamente se Auto Start estiver desmarcado; o jogo começa ao clicar Start/Entendi (tutorial) que chama StartGame(). Ajuste Win Round e painel de vitória conforme quiser.
+- Inimigos: são objetos de mundo (Transform + SpriteRenderer). Distâncias (stop/wait) em unidades pequenas (ex.: 1–3) funcionam bem com câmera ortho size baixo (5–10). Não use RectTransform em inimigos.
+- Barra de HP do inimigo: prefab do inimigo tem filho HealthBar com BG e Fill (SpriteRenderer). Script EnemyHealthBar no pai; arraste o Fill para o campo Fill. RoundManager limpa inimigos ao carregar.
+- Save: JsonSaveSystem salva XP, upgrades, HP e round (somente na fase de preparação). O botão de salvar fica desabilitado durante a batalha.
+- Fluxo de tutorial/start: PauseMenuUI exibe painel de tutorial; só inicia o RoundManager ao clicar “Entendi”. Certifique-se de que o botão Start chama OnStartClicked e o botão “Entendi” chama OnTutorialOkClicked.
+- Vitória: RoundManager tem Win Panel e OnWinBackToMenu para voltar ao menu. Configure o nome da cena do menu em menuSceneName e adicione à Build Settings.
